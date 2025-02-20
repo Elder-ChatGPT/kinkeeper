@@ -13,12 +13,15 @@ const Logout = () => {
 
   return (
     <div style={logoutContainer} onClick={handleLogout}>
-      <LogOut size={30} color="white" style={iconStyle} />
+      <LogOut size={30} color="white" style={iconStyle} />  
     </div>
   );
 };
 
 // Styles
+
+
+
 const logoutContainer = {
   position: 'fixed',
   top: '10px',

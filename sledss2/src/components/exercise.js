@@ -25,7 +25,7 @@ const Exercise = () => {
       <div style={rowStyle}>
         <div style={{ ...columnStyle, flex: 1 }}>
           <div style={smallButtonsContainerStyle}>
-            <button style={smallButtonStyle}><a style={{textDecoration:"none",color:"white"}} href="https://drive.google.com/file/d/1qx_24LqehaifswSG12zHatseREwV7-Tq/view?usp=sharing" target="_blank">LEARNING VIDEO</a></button>
+            <button style={smallButtonStyle}><a style={{textDecoration:"none",color:"white"}} href="https://youtu.be/U7SCI8h6hM8" target="_blank">EXERCISE  VIDEO</a></button>
             
         </div>
           </div>

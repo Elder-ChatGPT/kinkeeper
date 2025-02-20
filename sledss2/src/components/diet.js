@@ -25,7 +25,7 @@ const Diet = () => {
       <div style={rowStyle}>
         <div style={{ ...columnStyle, flex: 1 }}>
           <div style={smallButtonsContainerStyle}>
-            <button style={smallButtonStyle}><a style={{textDecoration:"none",color:"white"}} href="https://drive.google.com/file/d/1qx_24LqehaifswSG12zHatseREwV7-Tq/view?usp=sharing" target="_blank">LEARNING VIDEO</a></button>
+            <button style={smallButtonStyle}><a style={{textDecoration:"none",color:"white"}} href="https://youtu.be/VUYy2j0eq3E" target="_blank">DIET VIDEO</a></button>
             
         </div>
           </div>

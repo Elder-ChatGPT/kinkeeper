@@ -1,18 +1,29 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Style6.css'; // Import external CSS file
 
 const Page1 = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [age, setAge] = useState('');
+  const [yearOfBirth, setYearOfBirth] = useState('');
   const [gender, setGender] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    // Calculate the age based on current year and entered year of birth
+    const currentYear = new Date().getFullYear();
+    const calculatedAge = currentYear - Number(yearOfBirth);
+    
     try {
-      await axios.post('http://localhost:5000/register', { email, password, age, gender });
+      await axios.post('http://localhost:5000/register', { 
+        email, 
+        password, 
+        age: calculatedAge, 
+        gender,
+        yearOfBirth: Number(yearOfBirth)
+      });
       alert('Registration successful. Please login.');
       navigate('/about'); // Redirect to Login Page
     } catch (error) {
@@ -23,62 +34,74 @@ const Page1 = () => {
 
   return (
     <div style={bodyStyle}>
-    <form  style={formStyle} onSubmit={handleRegister}>
-       <h1 style={headerStyle}>Registration Form</h1>
-       <div style={inputContainerStyle}>
-      <label style={labelStyle}>Email:</label>
-      <input style={inputStyle}
-       type="email" 
-       value={email} 
-       required 
-       onChange={(e) => setEmail(e.target.value)} 
-       />
-      </div>
+      <form style={formStyle} onSubmit={handleRegister}>
+        <h1 style={headerStyle}>Registration Form</h1>
 
-      <div style={inputContainerStyle}>
-      <label style={labelStyle}>Password:</label>
-      <input style={inputStyle}
-       type="password" 
-       value={password} 
-       required 
-       onChange={(e) => setPassword(e.target.value)} 
-       />
-      </div>
+        <div style={inputContainerStyle}>
+          <label style={labelStyle}>Email:</label>
+          <input 
+            style={inputStyle}
+            type="email" 
+            value={email} 
+            required 
+            onChange={(e) => setEmail(e.target.value)} 
+          />
+        </div>
 
-      <div style={inputContainerStyle}>
-      <label style={labelStyle}>Age:</label>
-      <input style={inputStyle}
-       type="number" 
-       value={age} 
-       required 
-       onChange={(e) => setAge(e.target.value)} 
-       />
-      </div>
+        <div style={inputContainerStyle}>
+          <label style={labelStyle}>Password:</label>
+          <input 
+            style={inputStyle}
+            type="password" 
+            value={password} 
+            required 
+            onChange={(e) => setPassword(e.target.value)} 
+          />
+        </div>
 
-     <div style={inputContainerStyle}>
-      <label style={labelStyle}>Gender:</label>
-      <select style={inputStyle} 
-      value={gender} 
-      required 
-      onChange={(e) => setGender(e.target.value)}
-      >
-        <option value="">Select</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-      </div>
+        <div style={inputContainerStyle}>
+          <label style={labelStyle}>Year of Birth:</label>
+          <input 
+            style={inputStyle}
+            type="number" 
+            value={yearOfBirth} 
+            required 
+            onChange={(e) => setYearOfBirth(e.target.value)} 
+            placeholder="e.g. 1950"
+          />
+        </div>
 
-      <button style={{ ...buttonStyle, marginLeft: "10px" }} 
-      type="submit"
-      >
-        Submit
-      </button>
-      <p>Already have an account? <span onClick={() => navigate('/about')} style={{ cursor: 'pointer', color: 'blue' }}>Login here</span></p>
-    </form>
+        <div style={inputContainerStyle}>
+          <label style={labelStyle}>Gender:</label>
+          <select 
+            style={inputStyle} 
+            value={gender} 
+            required 
+            onChange={(e) => setGender(e.target.value)}
+          >
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+        <button style={{ ...buttonStyle, marginLeft: "10px" }} type="submit">
+          Submit
+        </button>
+        
+        <p>
+          Already have an account?{' '}
+          <span 
+            onClick={() => navigate('/about')} 
+            style={{ cursor: 'pointer', color: 'blue' }}
+          >
+            Login here
+          </span>
+        </p>
+      </form>
     </div>
   );
 };
-
 
 // Styles
 const bodyStyle = {
@@ -136,5 +159,6 @@ const buttonStyle = {
 };
 
 export default Page1;
+
 
 

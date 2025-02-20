@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -22,15 +22,24 @@ const About1 = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Convert scores to numbers and validate range
+    // Convert scores to numbers and validate range for only provided inputs
     const formattedScores = {};
+    let atLeastOneProvided = false;
     for (let key in scores) {
-      const value = Number(scores[key]);
-      if (value < 10 || value > 90) {
-        alert(`${key} score must be between 10 and 90`);
-        return;
+      if (scores[key].trim() !== '') {
+        atLeastOneProvided = true;
+        const value = Number(scores[key]);
+        if (value < 10 || value > 90) {
+          alert(`${key} score must be between 10 and 90`);
+          return;
+        }
+        formattedScores[key] = value;
       }
-      formattedScores[key] = value;
+    }
+    
+    if (!atLeastOneProvided) {
+      alert("Please enter at least one forum score.");
+      return;
     }
 
     try {
@@ -45,30 +54,25 @@ const About1 = () => {
 
   return (
     <div style={bodyStyle}>
-    <form style={formStyle} onSubmit={handleSubmit} >
-    <h1 style={headerStyle}>Score Submission Form</h1>
-      {Object.keys(scores).map((forum) => (
-        <div  style={inputContainerStyle} key={forum}>
-          <label style={labelStyle}>{forum} Score:</label>
-          <input style={inputStyle}
-            type="number"
-            name={forum}
-            value={scores[forum]}
-            onChange={handleChange}
-            min="10"
-            max="90"
-            required
-          />
-        </div>
-          
-      ))}
-       
-
-<button style={{ ...buttonStyle, marginLeft: "10px" }} 
-      type="submit"
-      >
-        Submit Scores
-      </button>
+      <form style={formStyle} onSubmit={handleSubmit}>
+        <h1 style={headerStyle}>Score Submission Form</h1>
+        {Object.keys(scores).map((forum) => (
+          <div style={inputContainerStyle} key={forum}>
+            <label style={labelStyle}>{forum} Score:</label>
+            <input
+              style={inputStyle}
+              type="number"
+              name={forum}
+              value={scores[forum]}
+              onChange={handleChange}
+              min="10"
+              max="90"
+            />
+          </div>
+        ))}
+        <button style={{ ...buttonStyle, marginLeft: "10px" }} type="submit">
+          Submit Scores
+        </button>
       </form>
     </div>
   );
@@ -128,6 +132,5 @@ const buttonStyle = {
   width: "150px",
   textAlign: "center",
 };
-
 
 export default About1;

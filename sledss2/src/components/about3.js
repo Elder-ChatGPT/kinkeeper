@@ -7,7 +7,6 @@ const forums = [
     name: "Socialization",
     description: "This test evaluates your social engagement and interactions.",
     testUrl: "https://artemciy.gitlab.io/loneliness-scale/#/"
-    
   },
   {
     name: "Learning",
@@ -23,7 +22,6 @@ const forums = [
     name: "Diet",
     description: "Evaluate your nutrition and eating habits.",
     testUrl: "https://guthealth.org/free-gut-health-quiz/"
-    
   },
   {
     name: "Stress",
@@ -44,8 +42,15 @@ const About3 = () => {
     <div className="forum-container">
       <h2 className="forum-title">Forum Tests</h2>
       <p className="forum-description">
-        Take tests in different forums to assess your well-being. Click "Take the Test" to get your score and "Paste Your Score" to submit it.
+        Take tests in different forums to assess your well-being. Click "Take the Test" to get your score and "Paste All Your Scores" to submit it.
       </p>
+      
+      {/* Sticky button container for score submission */}
+      <div className="score-button-container">
+        <button className="score-button" onClick={() => window.open('/about1', '_blank')}>
+          Paste All Your Scores
+        </button>
+      </div>
       
       {forums.map((forum, index) => (
         <div key={index} className="forum-card">
@@ -53,16 +58,11 @@ const About3 = () => {
           <p className="forum-info">{forum.description}</p>
           <div className="button-group">
             <a href={forum.testUrl} target="_blank" rel="noopener noreferrer" className="test-button">
-              Take the Test
+              Take The Test And Paste Your Score.
             </a>
           </div>
-          
         </div>
-        
       ))}
-      <button className="score-button" onClick={() => window.open('/about1', '_blank')}>
-              Paste All Your Scores
-            </button>
     </div>
   );
 };

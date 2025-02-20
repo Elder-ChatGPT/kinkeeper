@@ -305,44 +305,29 @@ app.post('/get-advice', async (req, res) => {
 
 
 
-
-
-
+// Chat endpoint that handles both predefined and custom questions
 app.post('/chat', async (req, res) => {
   try {
     const { message } = req.body;
-    const { CohereClientV2 } = require('cohere-ai');
-
-const cohere = new CohereClientV2({
-  token: '9StJFlYibvYlkScu4P2PXOYTl5xEr4Ye6L70mwc3',
-});
-
-(async () => {
-  const response = await cohere.chat({
-    model: 'command-r-plus',
-    messages: [
-      {
-        role: 'user',
-        content: message,
-      },
-    ],
-  });
-
-  const contentText = response.message.content.map(item => item.text).join(" ");
- const advice = JSON.stringify(response, null, 2)
- //res.json({ message: "advice" });
- res.json(contentText);
- console.log(contentText)
-})();
-
+    if (!message || !message.trim()) {
+      return res.status(400).json({ error: 'Message cannot be empty' });
+    }
+    
+    // Call Cohere's chat API with the provided message (question)
+    const response = await cohere.chat({
+      model: 'command-r-plus',
+      messages: [{ role: 'user', content: message }],
+    });
+    
+    // Extract advice from the response
+    const contentText = response.message.content.map(item => item.text).join(" ");
+    res.json(contentText);
     
   } catch (error) {
     console.error('Error communicating with Cohere API:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 
 // Start server

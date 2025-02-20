@@ -23,7 +23,7 @@ const Learning = () => {
       <div style={rowStyle}>
         <div style={{ ...columnStyle, flex: 1 }}>
           <div style={smallButtonsContainerStyle}>
-            <button style={smallButtonStyle}><a style={{textDecoration:"none",color:"white"}} href="https://drive.google.com/file/d/1qx_24LqehaifswSG12zHatseREwV7-Tq/view?usp=sharing" target="_blank">LEARNING VIDEO</a></button>
+            <button style={smallButtonStyle}><a style={{textDecoration:"none",color:"white"}} href="https://youtu.be/V6m79zMpQzc">LEARNING VIDEO</a></button>
             
         </div>
           </div>
