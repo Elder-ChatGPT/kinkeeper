@@ -43,7 +43,7 @@ const About1 = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/submit-scores', { userID, scores: formattedScores });
+      await axios.post('http://localhost:5003/submit-scores', { userID, scores: formattedScores });
       alert('Scores submitted successfully');
       navigate('/about5'); // Redirect to Advice Page
     } catch (error) {

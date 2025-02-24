@@ -13,7 +13,7 @@ const About5 = () => {
     if (!userID) {
       navigate('/about'); // Redirect if not logged in
     } else {
-      axios.get(`http://localhost:5000/view-scores/${userID}`)
+      axios.get(`http://localhost:5003/view-scores/${userID}`)
         .then(response => {
           const scores = response.data;
           

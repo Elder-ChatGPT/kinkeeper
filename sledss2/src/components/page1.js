@@ -17,7 +17,7 @@ const Page1 = () => {
     const calculatedAge = currentYear - Number(yearOfBirth);
     
     try {
-      await axios.post('http://localhost:5000/register', { 
+      await axios.post('http://localhost:5003/register', { 
         email, 
         password, 
         age: calculatedAge, 

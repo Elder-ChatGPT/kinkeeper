@@ -18,7 +18,7 @@ export const About2 = ({ token }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/ai-advice",
+        "http://localhost:5003/api/ai-advice",
         { prompt },
         { headers: { Authorization: token } }
       );

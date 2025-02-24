@@ -10,7 +10,7 @@ const About = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/login', { email, password });
+      const response = await axios.post('http://localhost:5003/login', { email, password });
       localStorage.setItem('token', response.data.token); // Store JWT token
       localStorage.setItem('userID', response.data.userID); // Store userID for score tracking
       alert('Login successful');
