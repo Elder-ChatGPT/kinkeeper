@@ -122,6 +122,7 @@ const getScoreMeaning = (forum, score) => {
   return meaning;
 };
 
+
 // Score Submission Route
 app.post('/submit-scores', async (req, res) => {
   const { userID, scores } = req.body;
